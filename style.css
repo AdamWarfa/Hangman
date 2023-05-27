@@ -2,11 +2,25 @@ body {
   margin: 0;
   font-family: "Roboto Mono", monospace;
   background-color: #222222;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
 }
 
 #fake-canvas {
   width: 100vw;
   height: 100vh;
+}
+
+#lives-display {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 50px;
+  color: #a0d8b3;
 }
 
 #play-space {
@@ -67,4 +81,35 @@ body {
   padding: 10px;
   margin-top: 30px;
   left: 37%;
+}
+
+#game-over-screen {
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  background-color: #222222;
+  color: #a0d8b3;
+}
+
+#game-over-text {
+  text-align: center;
+  font-size: 100px;
+}
+
+#game-over-word {
+  text-align: center;
+  font-size: 80px;
+}
+
+#game-over-btn {
+  font-size: 70px;
+  font-weight: 700;
+  position: absolute;
+  background-color: #a0d8b3;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 30px;
+  left: 50%;
+  transform: translate(-50%);
 }

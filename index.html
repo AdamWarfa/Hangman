@@ -12,6 +12,7 @@
   </head>
   <body>
     <div id="fake-canvas">
+      <h2 id="lives-display">LIVES: 10</h2>
       <article id="letters"></article>
       <div id="play-space">
         <div id="guess-line"></div>
@@ -24,6 +25,11 @@
         <input id="guessLetterValue" name="guessLetterValue" type="text" maxlength="1" placeholder="Guess a letter..." />
         <button>SUBMIT</button>
       </form> -->
+    </div>
+    <div id="game-over-screen" class="hidden">
+      <h2 id="game-over-text">GAME OVER</h2>
+      <h3 id="game-over-word">WORD</h3>
+      <button id="game-over-btn" onclick="location.reload()">PLAY AGAIN</button>
     </div>
     <script src="main.js"></script>
   </body>

@@ -1,8 +1,9 @@
 "use strict";
 window.addEventListener("load", initApp);
 
-let hiddenWord = "tomat";
+let hiddenWord;
 let hiddenLine = "_";
+let lives = 10;
 
 function initApp() {
   generateAlphabet();
@@ -101,6 +102,13 @@ function guessLetter(letter) {
     updateGuessLine();
   } else {
     console.log("Wrong");
+    lives = lives - 1;
+    document.querySelector("#lives-display").textContent = `LIVES: ${lives}`;
+    if (lives == 0) {
+      document.querySelector("#game-over-word").textContent = `The correct word was '${hiddenWord}'`;
+      document.querySelector("#fake-canvas").classList.add("hidden");
+      document.querySelector("#game-over-screen").classList.remove("hidden");
+    }
   }
 }
 
