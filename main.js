@@ -54,7 +54,7 @@ function generateAlphabet(a) {
     document.querySelector("#letters").insertAdjacentHTML(
       "beforeend",
       /*HTML*/ `
-<input class="letter-buttons" type="button" value=${letterValue} onclick="guessLetter('${letterValue}')">
+<input id="letter-button-${letterValue}" class="letter-buttons" type="button" value=${letterValue} onclick="guessLetter('${letterValue}')">
 `
     );
   }
@@ -102,6 +102,7 @@ function guessLetter(letter) {
   console.log(currentGuess);
 
   if (hiddenWord.includes(currentGuess)) {
+    document.querySelector("#letter-button-" + letter).classList.add("tried-letter-correct");
     console.log("Correct");
 
     let guessIndexes = [];
@@ -125,6 +126,7 @@ function guessLetter(letter) {
 
     updateGuessLine();
   } else {
+    document.querySelector("#letter-button-" + letter).classList.add("tried-letter-wrong");
     console.log("Wrong");
     lives = lives - 1;
     document.querySelector("#lives-display").textContent = `LIVES: ${lives}`;

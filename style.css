@@ -165,3 +165,13 @@ body {
   transform: translate(-50%);
   cursor: pointer;
 }
+
+.tried-letter-wrong {
+  filter: grayscale(100%) brightness(50%);
+  pointer-events: none;
+}
+
+.tried-letter-correct {
+  filter: grayscale(100%) brightness(150%);
+  pointer-events: none;
+}
