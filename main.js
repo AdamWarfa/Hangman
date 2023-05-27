@@ -4,14 +4,23 @@ window.addEventListener("load", initApp);
 let hiddenWord;
 let hiddenLine = "_";
 let lives;
+let streak = Number(localStorage.getItem("savedStreak"));
+if (streak == null) {
+  streak = 0;
+}
+
 const alphabet = "`abcdefghijklmnopqrstuvwxyz";
 
 function initApp() {
   document.querySelector("#one-player-btn").addEventListener("click", singlePlayerMode);
   document.querySelector("#two-player-btn").addEventListener("click", multiPlayerMode);
+  document.querySelector("#game-over-btn").addEventListener("click", restartGame);
+  document.querySelector("#win-btn").addEventListener("click", restartGame);
 }
 
 async function singlePlayerMode() {
+  document.querySelector("#streak-display").textContent = `STREAK: ${streak}🔥`;
+
   document.querySelector("#player-modes").classList.add("hidden");
   document.querySelector("#word-form").classList.add("hidden");
   document.querySelector("#fake-canvas").classList.remove("hidden");
@@ -21,10 +30,13 @@ async function singlePlayerMode() {
   console.log(hiddenWord);
 
   generateAlphabet(alphabet);
+  lives = hiddenWord.length + 3;
   generateGuessLine();
 }
 
 function multiPlayerMode() {
+  document.querySelector("#streak-display").textContent = `STREAK: ${streak}🔥`;
+
   document.querySelector("#player-modes").classList.add("hidden");
   document.querySelector("#fake-canvas").classList.remove("hidden");
 
@@ -131,16 +143,41 @@ function updateGuessLine() {
   );
 
   if (hiddenLine === hiddenWord) {
-    setTimeout(win, 100);
+    win();
   }
 }
 
 function gameOver() {
+  lives = 1;
+  streak = 0;
+  localStorage.setItem("savedStreak", streak);
+  console.log(streak);
   document.querySelector("#game-over-word").textContent = `The correct word was '${hiddenWord}'`;
   document.querySelector("#fake-canvas").classList.add("hidden");
   document.querySelector("#game-over-screen").classList.remove("hidden");
 }
 
 function win() {
-  alert("YOU WON!!");
+  streak = streak + 1;
+  console.log(streak);
+  localStorage.setItem("savedStreak", streak);
+
+  document.querySelector("#win-word").textContent = `The correct word was '${hiddenWord}'`;
+  document.querySelector("#fake-canvas").classList.add("hidden");
+  document.querySelector("#win-screen").classList.remove("hidden");
+}
+
+function restartGame() {
+  hiddenWord = "";
+  hiddenLine = "_";
+
+  document.querySelector("#streak-display").textContent = `STREAK: ${streak}🔥`;
+
+  document.querySelector("#letters").innerHTML = "";
+  document.querySelector("#guess-line").innerHTML = "";
+  console.log("restarted");
+  document.querySelector("#game-over-screen").classList.add("hidden");
+  document.querySelector("#fake-canvas").classList.add("hidden");
+  document.querySelector("#win-screen").classList.add("hidden");
+  document.querySelector("#player-modes").classList.remove("hidden");
 }

@@ -23,6 +23,15 @@ body {
   color: #a0d8b3;
 }
 
+#streak-display {
+  position: absolute;
+  left: 10%;
+
+  transform: translate(-50%);
+  font-size: 50px;
+  color: #a0d8b3;
+}
+
 #play-space {
   position: absolute;
   left: 50%;
@@ -81,9 +90,10 @@ body {
   padding: 10px;
   margin-top: 30px;
   left: 37%;
+  cursor: pointer;
 }
 
-#game-over-screen {
+.done-screen {
   width: 100vw;
   height: 100vh;
   z-index: 3;
@@ -91,17 +101,17 @@ body {
   color: #a0d8b3;
 }
 
-#game-over-text {
+.done-text {
   text-align: center;
   font-size: 100px;
 }
 
-#game-over-word {
+.done-word {
   text-align: center;
   font-size: 80px;
 }
 
-#game-over-btn {
+.done-btn {
   font-size: 70px;
   font-weight: 700;
   position: absolute;
@@ -112,6 +122,7 @@ body {
   margin-top: 30px;
   left: 50%;
   transform: translate(-50%);
+  cursor: pointer;
 }
 
 #player-modes {

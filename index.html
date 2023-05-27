@@ -18,6 +18,7 @@
     </div>
     <div id="fake-canvas" class="hidden">
       <h2 id="lives-display">LIVES</h2>
+      <h2 id="streak-display">STREAK</h2>
       <article id="letters"></article>
       <div id="play-space">
         <div id="guess-line"></div>
@@ -31,10 +32,15 @@
         <button>SUBMIT</button>
       </form> -->
     </div>
-    <div id="game-over-screen" class="hidden">
-      <h2 id="game-over-text">GAME OVER</h2>
-      <h3 id="game-over-word">WORD</h3>
-      <button id="game-over-btn" onclick="location.reload()">PLAY AGAIN</button>
+    <div id="game-over-screen" class="done-screen" class="hidden">
+      <h2 id="game-over-text" class="done-text">GAME OVER</h2>
+      <h3 id="game-over-word" class="done-word">WORD</h3>
+      <button id="game-over-btn" class="done-btn">PLAY AGAIN</button>
+    </div>
+    <div id="win-screen" class="done-screen" class="hidden">
+      <h2 id="win-text" class="done-text">YOU WON!</h2>
+      <h3 id="win-word" class="done-word">WORD</h3>
+      <button id="win-btn" class="done-btn">PLAY AGAIN</button>
     </div>
     <script src="main.js"></script>
   </body>
