@@ -3,47 +3,54 @@ window.addEventListener("load", initApp);
 
 let hiddenWord;
 let hiddenLine = "_";
-let lives = 10;
+let lives;
+const alphabet = "`abcdefghijklmnopqrstuvwxyz";
 
 function initApp() {
-  generateAlphabet();
-  document.querySelector("#word-form").addEventListener("submit", setHiddenWord);
-  //   document.querySelector("#guess-form").addEventListener("submit", guessLetter);
+  document.querySelector("#one-player-btn").addEventListener("click", singlePlayerMode);
+  document.querySelector("#two-player-btn").addEventListener("click", multiPlayerMode);
 }
 
-function generateAlphabet() {
-  document.querySelector("#letters").insertAdjacentHTML(
-    "beforeend",
-    /*HTML*/ `
-<input id="letter-button-A" class="letter-buttons" type="button" value="A" onclick="guessLetter('A')">
-<input id="letter-button-B" class="letter-buttons" type="button" value="B" onclick="guessLetter('B')">
-<input id="letter-button-C" class="letter-buttons" type="button" value="C" onclick="guessLetter('C')">
-<input id="letter-button-D" class="letter-buttons" type="button" value="D" onclick="guessLetter('D')">
-<input id="letter-button-E" class="letter-buttons" type="button" value="E" onclick="guessLetter('E')">
-<input id="letter-button-F" class="letter-buttons" type="button" value="F" onclick="guessLetter('F')">
-<input id="letter-button-G" class="letter-buttons" type="button" value="G" onclick="guessLetter('G')">
-<input id="letter-button-H" class="letter-buttons" type="button" value="H" onclick="guessLetter('H')">
-<input id="letter-button-I" class="letter-buttons" type="button" value="I" onclick="guessLetter('I')">
-<input id="letter-button-J" class="letter-buttons" type="button" value="J" onclick="guessLetter('J')">
-<input id="letter-button-K" class="letter-buttons" type="button" value="K" onclick="guessLetter('K')">
-<input id="letter-button-L" class="letter-buttons" type="button" value="L" onclick="guessLetter('L')">
-<input id="letter-button-M" class="letter-buttons" type="button" value="M" onclick="guessLetter('M')">
-<input id="letter-button-N" class="letter-buttons" type="button" value="N" onclick="guessLetter('N')">
-<input id="letter-button-O" class="letter-buttons" type="button" value="O" onclick="guessLetter('O')">
-<input id="letter-button-P" class="letter-buttons" type="button" value="P" onclick="guessLetter('P')">
-<input id="letter-button-Q" class="letter-buttons" type="button" value="Q" onclick="guessLetter('Q')">
-<input id="letter-button-R" class="letter-buttons" type="button" value="R" onclick="guessLetter('R')">
-<input id="letter-button-S" class="letter-buttons" type="button" value="S" onclick="guessLetter('S')">
-<input id="letter-button-T" class="letter-buttons" type="button" value="T" onclick="guessLetter('T')">
-<input id="letter-button-U" class="letter-buttons" type="button" value="U" onclick="guessLetter('U')">
-<input id="letter-button-V" class="letter-buttons" type="button" value="V" onclick="guessLetter('V')">
-<input id="letter-button-W" class="letter-buttons" type="button" value="W" onclick="guessLetter('W')">
-<input id="letter-button-X" class="letter-buttons" type="button" value="X" onclick="guessLetter('X')">
-<input id="letter-button-Y" class="letter-buttons" type="button" value="Y" onclick="guessLetter('Y')">
-<input id="letter-button-Z" class="letter-buttons" type="button" value="Z" onclick="guessLetter('Z')">
+async function singlePlayerMode() {
+  document.querySelector("#player-modes").classList.add("hidden");
+  document.querySelector("#word-form").classList.add("hidden");
+  document.querySelector("#fake-canvas").classList.remove("hidden");
 
-  `
-  );
+  let hiddenWordSingle = await getHiddenWordOnline("https://random-word-api.herokuapp.com/word");
+  hiddenWord = hiddenWordSingle.toUpperCase();
+  console.log(hiddenWord);
+
+  generateAlphabet(alphabet);
+  generateGuessLine();
+}
+
+function multiPlayerMode() {
+  document.querySelector("#player-modes").classList.add("hidden");
+  document.querySelector("#fake-canvas").classList.remove("hidden");
+
+  generateAlphabet(alphabet);
+  document.querySelector("#word-form").addEventListener("submit", setHiddenWord);
+}
+
+function generateAlphabet(a) {
+  let letterValue;
+  for (let i = 0; i < 26; i++) {
+    letterValue = String.fromCharCode(a.charCodeAt(i) + 1).toUpperCase();
+    console.log(letterValue);
+    document.querySelector("#letters").insertAdjacentHTML(
+      "beforeend",
+      /*HTML*/ `
+<input class="letter-buttons" type="button" value=${letterValue} onclick="guessLetter('${letterValue}')">
+`
+    );
+  }
+}
+
+async function getHiddenWordOnline(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  const dataString = data.toString();
+  return dataString;
 }
 
 function setHiddenWord(event) {
@@ -51,6 +58,9 @@ function setHiddenWord(event) {
   event.preventDefault();
   hiddenWord = document.querySelector("#hiddenWordValue").value.toUpperCase();
   console.log(hiddenWord);
+
+  lives = hiddenWord.length + 3;
+  document.querySelector("#lives-display").textContent = `LIVES: ${lives}`;
 
   generateGuessLine();
 }
@@ -105,9 +115,7 @@ function guessLetter(letter) {
     lives = lives - 1;
     document.querySelector("#lives-display").textContent = `LIVES: ${lives}`;
     if (lives == 0) {
-      document.querySelector("#game-over-word").textContent = `The correct word was '${hiddenWord}'`;
-      document.querySelector("#fake-canvas").classList.add("hidden");
-      document.querySelector("#game-over-screen").classList.remove("hidden");
+      gameOver();
     }
   }
 }
@@ -125,6 +133,12 @@ function updateGuessLine() {
   if (hiddenLine === hiddenWord) {
     setTimeout(win, 100);
   }
+}
+
+function gameOver() {
+  document.querySelector("#game-over-word").textContent = `The correct word was '${hiddenWord}'`;
+  document.querySelector("#fake-canvas").classList.add("hidden");
+  document.querySelector("#game-over-screen").classList.remove("hidden");
 }
 
 function win() {

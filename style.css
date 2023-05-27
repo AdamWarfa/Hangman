@@ -113,3 +113,44 @@ body {
   left: 50%;
   transform: translate(-50%);
 }
+
+#player-modes {
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  background-color: #222222;
+  color: #a0d8b3;
+}
+
+#player-modes-title {
+  text-align: center;
+  font-size: 80px;
+}
+
+#one-player-btn {
+  font-size: 30px;
+  font-weight: 700;
+  position: absolute;
+  background-color: #a0d8b3;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 30px;
+  left: 35%;
+  transform: translate(-50%);
+  cursor: pointer;
+}
+
+#two-player-btn {
+  font-size: 30px;
+  font-weight: 700;
+  position: absolute;
+  background-color: #a0d8b3;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 30px;
+  left: 65%;
+  transform: translate(-50%);
+  cursor: pointer;
+}

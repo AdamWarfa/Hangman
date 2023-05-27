@@ -11,8 +11,13 @@
     <title>Hangman</title>
   </head>
   <body>
-    <div id="fake-canvas">
-      <h2 id="lives-display">LIVES: 10</h2>
+    <div id="player-modes">
+      <h2 id="player-modes-title">Choose Game Mode</h2>
+      <button id="one-player-btn">Generate Random Word</button>
+      <button id="two-player-btn">Choose Secret Word</button>
+    </div>
+    <div id="fake-canvas" class="hidden">
+      <h2 id="lives-display">LIVES</h2>
       <article id="letters"></article>
       <div id="play-space">
         <div id="guess-line"></div>
