@@ -29,8 +29,10 @@ async function singlePlayerMode() {
   hiddenWord = hiddenWordSingle.toUpperCase();
   console.log(hiddenWord);
 
-  generateAlphabet(alphabet);
   lives = hiddenWord.length + 3;
+  document.querySelector("#lives-display").textContent = `LIVES: ${lives}`;
+
+  generateAlphabet(alphabet);
   generateGuessLine();
 }
 
