@@ -8,6 +8,10 @@ let streak = Number(localStorage.getItem("savedStreak"));
 if (streak == null) {
   streak = 0;
 }
+let hiScore = Number(localStorage.getItem("savedHiScore"));
+if (hiScore == null) {
+  hiScore = 0;
+}
 
 const alphabet = "`abcdefghijklmnopqrstuvwxyz";
 
@@ -164,7 +168,9 @@ function gameOver() {
 function win() {
   streak = streak + 1;
   console.log(streak);
+  hiScore = hiScore + 1;
   localStorage.setItem("savedStreak", streak);
+  localStorage.setItem("savedHiScore", hiScore);
 
   document.querySelector("#win-word").textContent = `The correct word was '${hiddenWord}'`;
   document.querySelector("#fake-canvas").classList.add("hidden");
