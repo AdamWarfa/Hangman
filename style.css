@@ -19,23 +19,21 @@ body {
   position: absolute;
   left: 50%;
   transform: translate(-50%);
-  font-size: 50px;
+  font-size: 40px;
   color: #a0d8b3;
 }
 
 #streak-display {
   position: absolute;
-  left: 15%;
-  transform: translate(-50%);
-  font-size: 50px;
+  left: 0%;
+  font-size: 40px;
   color: #a0d8b3;
 }
 
 #hiscore-display {
   position: absolute;
-  right: 5%;
-  transform: translate(-50%);
-  font-size: 50px;
+  right: 0;
+  font-size: 40px;
   color: #a0d8b3;
 }
 
@@ -265,7 +263,7 @@ body {
     font-size: 30px;
     position: absolute;
     left: 45%;
-    transform: translate(-50%);
+    transform: translate(-50%, -50%);
     color: #a0d8b3;
   }
 
@@ -273,7 +271,16 @@ body {
     position: absolute;
     left: 47%;
     top: 5%;
-    transform: translate(-50%);
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: #a0d8b3;
+  }
+
+  #hiscore-display {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
     font-size: 25px;
     color: #a0d8b3;
   }
