@@ -31,6 +31,14 @@ body {
   color: #a0d8b3;
 }
 
+#hiscore-display {
+  position: absolute;
+  right: 5%;
+  transform: translate(-50%);
+  font-size: 50px;
+  color: #a0d8b3;
+}
+
 #play-space {
   position: absolute;
   left: 50%;

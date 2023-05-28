@@ -24,6 +24,7 @@ function initApp() {
 
 async function singlePlayerMode() {
   document.querySelector("#streak-display").textContent = `STREAK: ${streak}🔥`;
+  document.querySelector("#hiscore-display").textContent = `HISCORE: ${hiScore}🍆`;
 
   document.querySelector("#player-modes").classList.add("hidden");
   document.querySelector("#word-form").classList.add("hidden");
@@ -42,6 +43,7 @@ async function singlePlayerMode() {
 
 function multiPlayerMode() {
   document.querySelector("#streak-display").textContent = `STREAK: ${streak}🔥`;
+  document.querySelector("#hiscore-display").textContent = `HISCORE: ${hiScore}🍆`;
 
   document.querySelector("#player-modes").classList.add("hidden");
   document.querySelector("#fake-canvas").classList.remove("hidden");
@@ -168,7 +170,9 @@ function gameOver() {
 function win() {
   streak = streak + 1;
   console.log(streak);
-  hiScore = hiScore + 1;
+  if (streak > hiScore) {
+    hiScore = hiScore + 1;
+  }
   localStorage.setItem("savedStreak", streak);
   localStorage.setItem("savedHiScore", hiScore);
 
