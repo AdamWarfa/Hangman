@@ -25,14 +25,14 @@ body {
 
 #streak-display {
   position: absolute;
-  left: 0%;
+  left: 3%;
   font-size: 40px;
   color: #a0d8b3;
 }
 
 #hiscore-display {
   position: absolute;
-  right: 0;
+  right: 3%;
   font-size: 40px;
   color: #a0d8b3;
 }
