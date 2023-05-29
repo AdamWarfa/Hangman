@@ -26,6 +26,8 @@ async function singlePlayerMode() {
   document.querySelector("#streak-display").textContent = `STREAK: ${streak}🔥`;
   document.querySelector("#hiscore-display").textContent = `HISCORE: ${hiScore}🍆`;
 
+  window.addEventListener("keydown", getKeydownLetter);
+
   document.querySelector("#player-modes").classList.add("hidden");
   document.querySelector("#word-form").classList.add("hidden");
   document.querySelector("#fake-canvas").classList.remove("hidden");
@@ -44,6 +46,8 @@ async function singlePlayerMode() {
 function multiPlayerMode() {
   document.querySelector("#streak-display").textContent = `STREAK: ${streak}🔥`;
   document.querySelector("#hiscore-display").textContent = `HISCORE: ${hiScore}🍆`;
+
+  window.addEventListener("keydown", getKeydownLetter);
 
   document.querySelector("#player-modes").classList.add("hidden");
   document.querySelector("#fake-canvas").classList.remove("hidden");
@@ -98,6 +102,15 @@ function generateGuessLine() {
 <h1 id="guess-word">${hiddenLine}</h1>
   `
   );
+}
+
+function getKeydownLetter(event) {
+  if (alphabet.includes(event.key)) {
+    console.log(event.key);
+    guessLetter(event.key.toUpperCase());
+  } else {
+    return null;
+  }
 }
 
 function guessLetter(letter) {
@@ -162,6 +175,9 @@ function gameOver() {
   streak = 0;
   localStorage.setItem("savedStreak", streak);
   console.log(streak);
+
+  window.removeEventListener("keydown", getKeydownLetter);
+
   document.querySelector("#game-over-word").textContent = `The correct word was '${hiddenWord}'`;
   document.querySelector("#fake-canvas").classList.add("hidden");
   document.querySelector("#game-over-screen").classList.remove("hidden");
@@ -175,6 +191,8 @@ function win() {
   }
   localStorage.setItem("savedStreak", streak);
   localStorage.setItem("savedHiScore", hiScore);
+
+  window.removeEventListener("keydown", getKeydownLetter);
 
   document.querySelector("#win-word").textContent = `The correct word was '${hiddenWord}'`;
   document.querySelector("#fake-canvas").classList.add("hidden");
